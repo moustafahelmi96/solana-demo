@@ -9,5 +9,10 @@
       "@shared/*": ["shared/*"],
       "@services/*": ["services/*"]
     }
+  },
+  "eslintConfig": {
+    "rules": {
+      "react-hooks/exhaustive-deps": "warn"
+    }
   }
 }

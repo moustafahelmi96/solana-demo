@@ -9,7 +9,7 @@ const SearchBar = () => {
 
   const styles = StyleSheet.create({
     mainContainer: {
-      height: hp(12),
+      height: hp(10),
       justifyContent: 'center',
       borderBottomWidth: 1,
       borderBottomColor: theme.border,

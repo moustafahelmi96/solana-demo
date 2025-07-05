@@ -1,8 +1,8 @@
 import { sendAxiosRequest } from '@/services/axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { IToken } from './types';
 
-const useTokens = () => {
+const useTokens = ({ limit, page }: { limit?: number; page?: number }) => {
   const [tokens, setTokens] = useState<IToken[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -19,8 +19,8 @@ const useTokens = () => {
           vs_currency: 'usd',
           category: 'solana-ecosystem',
           order: 'volume_desc',
-          per_page: 20,
-          page: 1,
+          per_page: limit,
+          page: page,
           sparkline: false,
           price_change_percentage: '24h',
         },
@@ -34,17 +34,13 @@ const useTokens = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
-
-  useEffect(() => {
-    fetchSolanaTokens();
-  }, []);
+  }, [limit, page]);
 
   return {
     tokens,
     loading,
     error,
-    refetch: fetchSolanaTokens,
+    fetchTokens: fetchSolanaTokens,
   };
 };
 

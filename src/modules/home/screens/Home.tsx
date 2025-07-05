@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppTheme } from '@/shared/styles/themeProvider';
 import {
   FlatList,
@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import { hp, wp } from '@/utils';
@@ -13,10 +14,13 @@ import Typography from '@/shared/components/Typography/Typography';
 import SingleTokenCard from '../components/SingleTokenCard';
 import useTokens from '../services/useToken';
 import { IToken } from '../services/types';
+import { useNavigation } from '@react-navigation/native';
+import { ALL_TOKENS_SCREEN } from '@/navigation/Routes';
 
 const Home = () => {
   const { theme } = useAppTheme();
-  const { tokens, refetch, loading } = useTokens();
+  const navigation = useNavigation();
+  const { tokens, fetchTokens, loading } = useTokens({ limit: 3, page: 1 });
 
   const styles = StyleSheet.create({
     mainContainer: {
@@ -24,7 +28,25 @@ const Home = () => {
       backgroundColor: theme.background,
       paddingHorizontal: wp(4),
     },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: hp(2),
+    },
+    viewAllButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   });
+
+  useEffect(() => {
+    fetchTokens();
+  }, []);
+
+  const navigateToAllTokens = () => {
+    navigation.navigate(ALL_TOKENS_SCREEN as never);
+  };
 
   const renderHeader = () => (
     <>
@@ -61,14 +83,20 @@ const Home = () => {
           width={'100%'}
         /> */}
       {tokens?.length > 0 && (
-        <Typography
-          text={'Featured Tokens'}
-          alignSelf="center"
-          marginTop={hp(2)}
-          size={14}
-          fontWeight={'bold'}
-          width={'100%'}
-        />
+        <View style={styles.row}>
+          <Typography
+            text={'Featured Tokens'}
+            alignSelf="center"
+            size={14}
+            fontWeight={'bold'}
+          />
+          <TouchableOpacity
+            style={styles.viewAllButton}
+            onPress={navigateToAllTokens}
+          >
+            <Typography text="View All" size={12} color={theme.secondaryText} />
+          </TouchableOpacity>
+        </View>
       )}
     </>
   );
@@ -102,7 +130,7 @@ const Home = () => {
           ListHeaderComponent={renderHeader}
           keyExtractor={item => item.id}
           refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={refetch} />
+            <RefreshControl refreshing={loading} onRefresh={fetchTokens} />
           }
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
