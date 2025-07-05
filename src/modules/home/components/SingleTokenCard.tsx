@@ -2,20 +2,22 @@ import Typography from '@/shared/components/Typography/Typography';
 import { useAppTheme } from '@/shared/styles/themeProvider';
 import { hp, wp } from '@/utils';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 interface ISingleTokenCard {
-  tokenName: string;
-  price: string;
-  priceChangePercent: string;
-  rankInfo: string;
+  name: string;
+  symbol: string;
+  price: number;
+  image: string;
+  priceChangePercent: number;
 }
 
 const SingleTokenCard = ({
-  tokenName,
+  name,
+  symbol,
   price,
+  image,
   priceChangePercent,
-  rankInfo,
 }: ISingleTokenCard) => {
   const { theme } = useAppTheme();
   const styles = StyleSheet.create({
@@ -31,13 +33,10 @@ const SingleTokenCard = ({
       paddingHorizontal: wp(4),
       paddingVertical: hp(1),
     },
-    tokenBox: {
+    tokenImage: {
       width: wp(10),
       height: wp(10),
       borderRadius: wp(2),
-      backgroundColor: theme.accent,
-      justifyContent: 'center',
-      alignItems: 'center',
     },
     infoContainer: {
       width: '55%',
@@ -53,21 +52,25 @@ const SingleTokenCard = ({
   });
   return (
     <View style={styles.container}>
-      <View style={styles.tokenBox}>
-        <Typography text={tokenName} size={14} />
-      </View>
+      <Image
+        source={{
+          uri: image,
+        }}
+        style={styles.tokenImage}
+      />
       <View style={styles.infoContainer}>
         <Typography
-          text={tokenName}
+          text={name}
           alignSelf="center"
           size={14}
           fontWeight={'bold'}
           color={theme.text}
           textAlign="left"
           width={'100%'}
+          maxChar={30}
         />
         <Typography
-          text={rankInfo}
+          text={symbol}
           alignSelf="center"
           size={11}
           fontWeight={'bold'}
@@ -78,18 +81,18 @@ const SingleTokenCard = ({
       </View>
       <View style={styles.statisticsContainer}>
         <Typography
-          text={price}
+          text={`${price?.toFixed(2)}`}
           alignSelf="center"
           size={12}
           fontWeight={'bold'}
           color={theme.text}
         />
         <Typography
-          text={priceChangePercent}
+          text={`${priceChangePercent}`}
           alignSelf="center"
           size={10}
           fontWeight={'bold'}
-          color={theme.failure}
+          color={priceChangePercent < 0 ? theme.failure : theme.success}
         />
       </View>
     </View>

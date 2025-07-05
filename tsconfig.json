@@ -6,7 +6,8 @@
       "@/*": ["*"],
       "@modules/*": ["modules/*"],
       "@navigation/*": ["navigation/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@services/*": ["services/*"]
     }
   }
 }

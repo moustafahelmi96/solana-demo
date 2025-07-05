@@ -9,7 +9,8 @@ module.exports = {
           '@': './src',
           '@modules': './src/modules',
           '@navigation': './src/navigation',
-          '@shared': './src/shared'
+          '@shared': './src/shared',
+          '@services': './src/services'
         },
       },
     ],
