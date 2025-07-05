@@ -9,6 +9,8 @@ export const lightTheme = {
   secondaryText: colors.grey500,
   subtleText: colors.grey700,
   activeTab: colors.blue500,
+  success: colors.green500,
+  failure: colors.red500,
 };
 
 export const darkTheme = {
@@ -20,6 +22,8 @@ export const darkTheme = {
   secondaryText: colors.grey300,
   subtleText: colors.grey700,
   activeTab: colors.blue500,
+  success: colors.green500,
+  failure: colors.red500,
 };
 
 export type AppTheme = typeof lightTheme;
