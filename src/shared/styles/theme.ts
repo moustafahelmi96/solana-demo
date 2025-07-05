@@ -1,17 +1,25 @@
 import { colors } from './colors';
 
 export const lightTheme = {
-  background: colors.white100,
-  text: colors.grey900,
-  cardBackground: colors.grey200,
+  background: '#FFFFFF',
+  text: colors.black900,
+  cardBackground: '#F9FAFB',
   accent: colors.purple500,
+  border: '#E5E7EB',
+  secondaryText: colors.grey500,
+  subtleText: colors.grey700,
+  activeTab: colors.blue500,
 };
 
 export const darkTheme = {
   background: colors.black900,
   text: colors.white100,
-  cardBackground: colors.grey800,
+  cardBackground: colors.black800,
   accent: colors.purple500,
+  border: colors.border,
+  secondaryText: colors.grey300,
+  subtleText: colors.grey700,
+  activeTab: colors.blue500,
 };
 
 export type AppTheme = typeof lightTheme;
