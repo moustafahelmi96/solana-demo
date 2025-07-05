@@ -2,7 +2,7 @@ import { useAppTheme } from '@/shared/styles/themeProvider';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-const Home = () => {
+const Tokens = () => {
   const { theme } = useAppTheme();
   const styles = StyleSheet.create({
     mainContainer: {
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Tokens;

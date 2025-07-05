@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HOME_NAVIGATOR } from '@navigation/Routes';
+import { HOME_NAVIGATOR, TOKENS_NAVIGATOR } from '@navigation/Routes';
 import HomeNavigator from '@navigation/HomeNavigator';
 import SingleTabBar from './components/TabBar';
 import { StyleSheet } from 'react-native';
 import { useAppTheme } from '@/shared/styles/themeProvider';
+import TokensNavigator from './TokensNavigator';
 
 function TabBarIcon({ focused, title }: { focused: boolean; title: string }) {
   return <SingleTabBar focused={focused} title={title} />;
@@ -38,6 +39,20 @@ const BottomNavigator = () => {
               TabBarIcon({
                 focused,
                 title: 'Home',
+              }),
+          };
+        }}
+      />
+      <Tab.Screen
+        name={TOKENS_NAVIGATOR}
+        component={TokensNavigator}
+        options={() => {
+          return {
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) =>
+              TabBarIcon({
+                focused,
+                title: 'Tokens',
               }),
           };
         }}

@@ -1,6 +1,6 @@
 import Typography from '@/shared/components/Typography/Typography';
 import { useAppTheme } from '@/shared/styles/themeProvider';
-import { hp, wp } from '@/utils';
+import { getInitials, hp, wp } from '@/utils';
 import React, { Fragment } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -47,14 +47,22 @@ const SingleTabBar = ({
       {focused ? (
         <>
           <View style={styles.activeTab}>
-            <Typography text={'H'} size={10} color={theme.subtleText} />
+            <Typography
+              text={getInitials(title)}
+              size={10}
+              color={theme.subtleText}
+            />
           </View>
           <Typography text={title} size={10} color={theme.text} />
         </>
       ) : (
         <>
           <View style={styles.inActiveTab}>
-            <Typography text={'H'} size={10} color={theme.subtleText} />
+            <Typography
+              text={getInitials(title)}
+              size={10}
+              color={theme.subtleText}
+            />
           </View>
           <Typography text={title} size={10} color={theme.subtleText} />
         </>
