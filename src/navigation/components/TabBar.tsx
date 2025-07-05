@@ -1,36 +1,64 @@
+import Typography from '@/shared/components/Typography/Typography';
 import { useAppTheme } from '@/shared/styles/themeProvider';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { hp, wp } from '@/utils';
+import React, { Fragment } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const SingleTabBar = ({
   focused,
   title,
-  icon,
 }: {
   focused: boolean;
   title: string;
-  icon?: React.ReactNode;
 }) => {
   const { theme } = useAppTheme();
   const styles = StyleSheet.create({
     container: {
-      width: 50,
-      height: 50,
-      justifyContent: 'center',
+      width: wp(15),
+      height: hp(6),
+      justifyContent: 'space-evenly',
       alignItems: 'center',
-      backgroundColor: 'red',
     },
     text: {
       color: focused ? theme.text : theme.cardBackground,
       fontSize: 12,
       fontWeight: '500',
     },
+    activeTab: {
+      width: wp(7),
+      height: wp(7),
+      borderRadius: wp(5),
+      backgroundColor: theme.activeTab,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    inActiveTab: {
+      width: wp(7),
+      height: wp(7),
+      borderRadius: wp(5),
+      backgroundColor: theme.cardBackground,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
 
   return (
     <View style={styles.container}>
-      {icon && icon}
-      <Text style={styles.text}>{title}</Text>
+      {focused ? (
+        <>
+          <View style={styles.activeTab}>
+            <Typography text={'H'} size={10} color={theme.subtleText} />
+          </View>
+          <Typography text={title} size={10} color={theme.text} />
+        </>
+      ) : (
+        <>
+          <View style={styles.inActiveTab}>
+            <Typography text={'H'} size={10} color={theme.subtleText} />
+          </View>
+          <Typography text={title} size={10} color={theme.subtleText} />
+        </>
+      )}
     </View>
   );
 };

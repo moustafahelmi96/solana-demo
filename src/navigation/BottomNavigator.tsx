@@ -3,29 +3,29 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HOME_NAVIGATOR } from '@navigation/Routes';
 import HomeNavigator from '@navigation/HomeNavigator';
 import SingleTabBar from './components/TabBar';
+import { StyleSheet } from 'react-native';
+import { useAppTheme } from '@/shared/styles/themeProvider';
 
-function TabBarIcon({
-  focused,
-  title,
-  icon,
-}: {
-  focused: boolean;
-  title: string;
-  icon?: React.ReactNode;
-}) {
-  return <SingleTabBar focused={focused} title={title} icon={icon} />;
+function TabBarIcon({ focused, title }: { focused: boolean; title: string }) {
+  return <SingleTabBar focused={focused} title={title} />;
 }
 
 const BottomNavigator = () => {
   const Tab = createBottomTabNavigator();
+  const { theme } = useAppTheme();
+
+  const styles = StyleSheet.create({
+    tabBar: {
+      backgroundColor: theme.background,
+      paddingTop: 15,
+    },
+  });
 
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: 'green',
-        },
+        tabBarStyle: styles.tabBar,
       }}
     >
       <Tab.Screen
